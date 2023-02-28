@@ -1,7 +1,7 @@
 ﻿using FoodStoreAPI.Models;
 using FoodStoreAPI.Models.Contracts;
-using FoodStoreAPI.Models.Repository;
 using FoodStoreAPI.Utilities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -50,6 +50,7 @@ namespace FoodStoreAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public IActionResult Post([FromBody] Product product)
         {
             if (ModelState.IsValid)
@@ -69,6 +70,7 @@ namespace FoodStoreAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult UpdateProduct(int id, [FromBody]Product product)
         {
             if (id != product.Id)
@@ -92,6 +94,7 @@ namespace FoodStoreAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             var product = _repo.Product.GetProduct(id);

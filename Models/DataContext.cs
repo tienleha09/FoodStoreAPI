@@ -7,5 +7,6 @@ namespace FoodStoreAPI.Models
         public DataContext(DbContextOptions<DataContext> opt): base(opt) { }
         
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }
